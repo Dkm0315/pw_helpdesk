@@ -1,0 +1,368 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:category_name",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "is_sub_category",
+  "parent_category",
+  "category_name",
+  "category_code",
+  "description",
+  "is_active",
+  "column_break_1",
+  "assignment_section",
+  "same_assignee_as_category",
+  "assign_issue_to_user",
+  "assignee",
+  "assign_issue_to_external_vendor",
+  "assign_issue_to_permission_role_holder",
+  "permission_role_holder",
+  "column_break_2",
+  "form_section",
+  "attach_form_for_issue_creation",
+  "attach_same_form_as_category",
+  "make_attachment_mandatory",
+  "same_attachment_setting_as_category",
+  "hide_attachment_field",
+  "display_sub_category_only_in_mobile_app",
+  "make_location_mandatory",
+  "section_break_3",
+  "escalation_section",
+  "same_escalation_settings_as_category",
+  "enable_escalation",
+  "escalation_type",
+  "escalation_level_1",
+  "escalation_1_point",
+  "escalation_1_unit",
+  "escalation_1_assignee",
+  "escalation_level_2",
+  "escalation_2_point",
+  "escalation_2_unit",
+  "escalation_2_assignee",
+  "escalation_level_3",
+  "escalation_3_point",
+  "escalation_3_unit",
+  "escalation_3_assignee",
+  "section_break_4",
+  "meta_tab"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "is_sub_category",
+   "fieldtype": "Check",
+   "label": "Is Sub Category"
+  },
+  {
+   "depends_on": "eval:doc.is_sub_category",
+   "fieldname": "parent_category",
+   "fieldtype": "Link",
+   "label": "Parent Category",
+   "options": "HD Category"
+  },
+  {
+   "fieldname": "category_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "category_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Category Code",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assignment_section",
+   "fieldtype": "Section Break",
+   "label": "Assignment Settings"
+  },
+  {
+   "default": "0",
+   "fieldname": "same_assignee_as_category",
+   "fieldtype": "Check",
+   "label": "Same Assignee as Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "assign_issue_to_user",
+   "fieldtype": "Check",
+   "label": "Assign Issue To User"
+  },
+  {
+   "depends_on": "eval:doc.assign_issue_to_user",
+   "fieldname": "assignee",
+   "fieldtype": "Data",
+   "label": "Assignee",
+   "description": "Enter email addresses separated by commas"
+  },
+  {
+   "default": "0",
+   "fieldname": "assign_issue_to_external_vendor",
+   "fieldtype": "Check",
+   "label": "Assign Issue to External Vendor"
+  },
+  {
+   "default": "0",
+   "fieldname": "assign_issue_to_permission_role_holder",
+   "fieldtype": "Check",
+   "label": "Assign Issue to Permission Role Holder"
+  },
+  {
+   "depends_on": "eval:doc.assign_issue_to_permission_role_holder",
+   "fieldname": "permission_role_holder",
+   "fieldtype": "Data",
+   "label": "Permission Role Holder"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "form_section",
+   "fieldtype": "Section Break",
+   "label": "Form Settings"
+  },
+  {
+   "default": "0",
+   "fieldname": "attach_form_for_issue_creation",
+   "fieldtype": "Check",
+   "label": "Attach Form for Issue Creation"
+  },
+  {
+   "default": "0",
+   "fieldname": "attach_same_form_as_category",
+   "fieldtype": "Check",
+   "label": "Attach Same Form as Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "make_attachment_mandatory",
+   "fieldtype": "Check",
+   "label": "Make Attachment Mandatory"
+  },
+  {
+   "default": "0",
+   "fieldname": "same_attachment_setting_as_category",
+   "fieldtype": "Check",
+   "label": "Same Attachment Setting as Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "hide_attachment_field",
+   "fieldtype": "Check",
+   "label": "Hide Attachment Field"
+  },
+  {
+   "default": "0",
+   "fieldname": "display_sub_category_only_in_mobile_app",
+   "fieldtype": "Check",
+   "label": "Display Sub-Category only in Mobile App"
+  },
+  {
+   "default": "0",
+   "fieldname": "make_location_mandatory",
+   "fieldtype": "Check",
+   "label": "Make Location Mandatory"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "escalation_section",
+   "fieldtype": "Section Break",
+   "label": "Escalation Settings"
+  },
+  {
+   "default": "0",
+   "fieldname": "same_escalation_settings_as_category",
+   "fieldtype": "Check",
+   "label": "Same Escalation Settings as Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_escalation",
+   "fieldtype": "Check",
+   "label": "Enable Escalation"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_type",
+   "fieldtype": "Select",
+   "label": "Escalation Type",
+   "options": "Time-based\nStatus-based\nPriority-based"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_level_1",
+   "fieldtype": "Section Break",
+   "label": "Escalation Level 1"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_1_point",
+   "fieldtype": "Int",
+   "label": "Escalation 1 Point (Hours)"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_1_unit",
+   "fieldtype": "Select",
+   "label": "Escalation 1 Unit",
+   "options": "Hours\nDays\nWeeks"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_1_assignee",
+   "fieldtype": "Data",
+   "label": "Escalation 1 Assignee",
+   "description": "Enter email addresses separated by commas"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_level_2",
+   "fieldtype": "Section Break",
+   "label": "Escalation Level 2"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_2_point",
+   "fieldtype": "Int",
+   "label": "Escalation 2 Point (Hours)"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_2_unit",
+   "fieldtype": "Select",
+   "label": "Escalation 2 Unit",
+   "options": "Hours\nDays\nWeeks"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_2_assignee",
+   "fieldtype": "Data",
+   "label": "Escalation 2 Assignee",
+   "description": "Enter email addresses separated by commas"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_level_3",
+   "fieldtype": "Section Break",
+   "label": "Escalation Level 3"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_3_point",
+   "fieldtype": "Int",
+   "label": "Escalation 3 Point (Hours)"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_3_unit",
+   "fieldtype": "Select",
+   "label": "Escalation 3 Unit",
+   "options": "Hours\nDays\nWeeks"
+  },
+  {
+   "depends_on": "eval:doc.enable_escalation",
+   "fieldname": "escalation_3_assignee",
+   "fieldtype": "Data",
+   "label": "Escalation 3 Assignee",
+   "description": "Enter email addresses separated by commas"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+
+  {
+   "fieldname": "meta_tab",
+   "fieldtype": "Tab Break",
+   "label": "Meta"
+  }
+ ],
+ "icon": "fa fa-folder",
+ "idx": 1,
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "PW Helpdesk",
+ "name": "HD Category",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agent",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agent Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+} 

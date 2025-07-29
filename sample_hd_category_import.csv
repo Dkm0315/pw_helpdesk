@@ -1,0 +1,27 @@
+Category Name,Category Code,Description,Is Active,Same Assignee as Category,Assign Issue To User,Assignee,Assign Issue to External Vendor,Assign Issue to Permission Role Holder,Permission Role Holder,Attach Form for Issue Creation,Attach Same Form as Category,Make Attachment Mandatory,Same Attachment Setting as Category,Hide Attachment Field,Display Sub-Category only in Mobile App,Make Location Mandatory,Same Escalation Settings as Category,Enable Escalation,Escalation Type,Escalation 1 Point,Escalation 1 Unit,Escalation 1 Assignee,Escalation 2 Point,Escalation 2 Unit,Escalation 2 Assignee,Escalation 3 Point,Escalation 3 Unit,Escalation 3 Assignee
+BGV,BV-1,Background Verification related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Exit,EX-1,Exit process related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+HRBP,HR-1,HR Business Partner related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mediclaim,MD-1,Mediclaim related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Onboarding,OB-1,Onboarding process related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Others,OT-1,General and miscellaneous queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Payroll/Salary,PR-1,Payroll and salary related queries,1,0,1,ashi@ineuron.ai;deepak@ineuron.ai,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Probation/ Confirmation,PB-1,Probation and confirmation related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Recruitment,RC-1,Recruitment process related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Department/Designation Incorrect,DP-1,Department and designation correction queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Reimbursement,RE-1,Reimbursement related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Leave,LE_1,Leave related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+IT/Tax/TDS,TD_1,IT Tax and TDS related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Student Free Access,FA_1,Student free access related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PF/ESI,PE_1,PF and ESI related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bank Details Update,BD_1,Bank details update related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Appointment Letter,AL_1,Appointment letter related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Attendance,AT_1,Attendance related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Advance Loan,AD_1,Advance loan related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Internal Transfer,IN_1,Internal transfer related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rewards & Recognition,RR_1,Rewards and recognition related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+POSH,PH_1,POSH related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Group Term Life Insurance,GT_1,Group term life insurance related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darwinbox Issues,DI_1,Darwinbox system related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Performance Management System,PMS_1,Performance management system related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zaggle,ZA_1,Zaggle related queries,1,0,0,,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 

@@ -137,13 +137,15 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"HD Ticket": {
+		"validate": "pw_helpdesk.customizations.ticket_events.validate_ticket_closure",
+		"on_update": "pw_helpdesk.customizations.ticket_events.auto_assign_based_on_category"
+	},
+	"HD Ticket Comment": {
+		"after_insert": "pw_helpdesk.customizations.ticket_events.on_ticket_comment_insert"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
