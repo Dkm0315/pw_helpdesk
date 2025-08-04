@@ -43,7 +43,10 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"HD Service Level Agreement": "pw_helpdesk/custom/client_scripts/hd_service_level_agreement.js",
+	"Assignment Rule": "pw_helpdesk/custom/client_scripts/assignment_rule.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -139,13 +142,43 @@ app_license = "mit"
 
 doc_events = {
 	"HD Ticket": {
-		"validate": "pw_helpdesk.customizations.ticket_events.validate_ticket_closure",
-		"on_update": "pw_helpdesk.customizations.ticket_events.auto_assign_based_on_category"
+		"validate": [
+			"pw_helpdesk.customizations.ticket_events.validate_ticket_closure"
+		],
+		"after_insert": [
+			"pw_helpdesk.customizations.ticket_events.auto_assign_agents_after_save",
+			"pw_helpdesk.customizations.real_time_automation.ticket_enhanced_assignment"
+		],
+		"after_save": [
+			"pw_helpdesk.customizations.ticket_events.auto_assign_agents_after_save",
+			"pw_helpdesk.customizations.real_time_automation.ticket_enhanced_assignment"
+		]
 	},
 	"HD Ticket Comment": {
 		"after_insert": "pw_helpdesk.customizations.ticket_events.on_ticket_comment_insert"
+	},
+	"HD Team": {
+		"validate": "pw_helpdesk.customizations.real_time_automation.team_real_time_sync",
+		"after_save": [
+			"pw_helpdesk.customizations.ticket_events.on_team_save",
+			"pw_helpdesk.customizations.real_time_automation.team_real_time_sync"
+		]
+	},
+	"HD Service Level Agreement": {
+		"validate": "pw_helpdesk.customizations.real_time_automation.sla_real_time_validation"
+	},
+	"Assignment Rule": {
+		"validate": "pw_helpdesk.customizations.real_time_automation.assignment_rule_real_time_validation"
 	}
 }
+
+# Import enhanced SLA system
+def after_install():
+	"""Initialize enhanced SLA system after app installation"""
+	try:
+		import pw_helpdesk.customizations.enhanced_sla
+	except ImportError:
+		pass
 
 # Scheduled Tasks
 # ---------------
@@ -243,4 +276,14 @@ doc_events = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+fixtures = [
+    {"dt": "HD Service Level Agreement", "dt":"HD Ticket"},
+]
 
+# Import enhanced SLA system on startup
+def after_app_install():
+	"""Initialize enhanced SLA system after app installation"""
+	try:
+		import pw_helpdesk.customizations.enhanced_sla
+	except ImportError:
+		pass

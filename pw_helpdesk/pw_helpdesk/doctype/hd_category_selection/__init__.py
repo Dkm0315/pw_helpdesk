@@ -1,0 +1,1 @@
+# __init__.py file for HD Category Selection DocType 

@@ -1,7 +1,6 @@
 import frappe
 from frappe.model.document import Document
 from frappe import _
-import json
 from helpdesk.helpdesk.doctype.hd_ticket.hd_ticket import HDTicket
 
 # MONKEY PATCH: Fix core permission issue in on_communication_update
@@ -76,114 +75,44 @@ def validate_ticket_closure(doc, method):
             doc.resolution_date = frappe.utils.now_datetime()
 
 
-def apply_category_based_sla_before_save(doc, method):
-    """Apply SLA automatically based on ticket category - called in validate"""
-    try:
-        if not doc.custom_category or doc.sla:
-            return
-            
-        # Find SLA agreements that include this category
-        sla_agreements = frappe.db.sql("""
-            SELECT DISTINCT parent, custom_auto_assign_team, custom_assignment_rule
-            FROM `tabHD Category MultiSelect` cms
-            JOIN `tabHD Service Level Agreement` sla ON cms.parent = sla.name
-            WHERE cms.category = %s AND sla.enabled = 1
-            ORDER BY sla.creation ASC
-            LIMIT 1
-        """, (doc.custom_category,), as_dict=True)
-        
-        if sla_agreements:
-            sla_agreement = sla_agreements[0]
-            doc.sla = sla_agreement.parent
-            
-            # Auto-assign team if specified
-            if sla_agreement.custom_auto_assign_team:
-                doc.agent_group = sla_agreement.custom_auto_assign_team
-                
-            frappe.msgprint(f"SLA '{sla_agreement.parent}' automatically applied based on category '{doc.custom_category}'")
-            
-    except Exception as e:
-        frappe.log_error(f"Error applying category-based SLA: {str(e)}", "Category SLA Assignment Error")
-
-
-def auto_assign_based_on_category(doc, method):
-    """Auto-assign ticket based on category - without SLA setting"""
-    if doc.custom_category:
-        try:
-            # Don't apply SLA here - it will be handled in before_save
-            # Only handle team assignment based on category
-            
-            category_doc = frappe.get_doc("HD Category", doc.custom_category)
-            
-            # Set agent group
-            team_mapping = {
-                "Technical Support": "Technical Support Team",
-                "Billing": "Billing Support Team"
-            }
-            
-            if category_doc.category_name in team_mapping:
-                team_name = team_mapping[category_doc.category_name]
-                if frappe.db.exists("HD Team", team_name):
-                    doc.agent_group = team_name
-                    
-        except Exception as e:
-            frappe.log_error(f"Error in category assignment: {str(e)}")
-
-
 def auto_assign_agents_after_save(doc, method):
-    """Auto-assign agents based on team assignment rules after ticket is saved"""
+    """
+    Auto-assign agents after ticket save - this is now simplified 
+    since most logic is handled in the enhanced SLA system
+    """
     try:
+        # Enhanced SLA system now handles most assignment logic
+        # This function now mainly serves as a fallback for edge cases
+        
         if not doc.agent_group:
             return
             
-        team = frappe.get_doc("HD Team", doc.agent_group)
+        # Check if ticket is already assigned
+        existing_assignments = frappe.db.sql("""
+            SELECT allocated_to FROM `tabToDo` 
+            WHERE reference_type = 'HD Ticket' AND reference_name = %s 
+            AND status = 'Open'
+        """, doc.name, as_dict=True)
         
-        # Use team's assignment rule if available
-        if team.assignment_rule:
-            try:
-                # Get the assignment rule and its user assignment
-                assignment_rule = frappe.get_doc("Assignment Rule", team.assignment_rule)
-                
-                if hasattr(assignment_rule, 'custom_user_assignment') and assignment_rule.custom_user_assignment:
-                    # Get users from Dynamic User Assignment
-                    user_assignment = frappe.get_doc("Dynamic User Assignment", assignment_rule.custom_user_assignment)
-                    if user_assignment.users:
-                        user_list = [user.user for user in user_assignment.users]
-                        
-                        # Simple round-robin assignment
-                        if user_list:
-                            # Get the next user (simple rotation based on ticket ID)
-                            ticket_number = int(doc.name.split('-')[-1]) if '-' in doc.name else 1
-                            selected_user = user_list[ticket_number % len(user_list)]
-                            
-                            # Assign ticket to the selected user with ignore_permissions=True
-                            from frappe.desk.form.assign_to import add
-                            add({
-                                "assign_to": [selected_user],
-                                "doctype": "HD Ticket",
-                                "name": doc.name,
-                                "description": f"Auto-assigned via {team.assignment_rule}"
-                            }, ignore_permissions=True)
-                            
-                            frappe.msgprint(f"Ticket assigned to {selected_user} via {team.assignment_rule}")
-                            return
-                            
-            except Exception as e:
-                frappe.log_error(f"Error in assignment rule processing: {str(e)}")
-        
-        # Fallback: assign directly from team users
-        assign_from_team_users(doc, team)
+        if existing_assignments:
+            # Already assigned, nothing to do
+            return
+            
+        # Fallback assignment if enhanced SLA didn't handle it
+        _fallback_team_assignment(doc)
         
     except Exception as e:
-        frappe.log_error(f"Error in auto-assignment: {str(e)}")
+        frappe.log_error(f"Error in simplified auto-assignment: {str(e)}")
 
 
-def assign_from_team_users(doc, team):
-    """Fallback method to assign directly from team users"""
+def _fallback_team_assignment(doc):
+    """Fallback method for team-based assignment"""
     try:
+        team = frappe.get_doc("HD Team", doc.agent_group)
+        
         if team.users:
             # Simple round-robin from team users
-            ticket_number = int(doc.name.split('-')[-1]) if '-' in doc.name else 1
+            ticket_number = int(doc.name.split('-')[-1]) if '-' in doc.name and doc.name.split('-')[-1].isdigit() else 1
             selected_user = team.users[ticket_number % len(team.users)].user
             
             from frappe.desk.form.assign_to import add
@@ -191,13 +120,11 @@ def assign_from_team_users(doc, team):
                 "assign_to": [selected_user],
                 "doctype": "HD Ticket", 
                 "name": doc.name,
-                "description": f"Auto-assigned from team {team.name}"
+                "description": f"Fallback assignment from team {team.name}"
             }, ignore_permissions=True)
             
-            frappe.msgprint(f"Ticket assigned to {selected_user} from team {team.name}")
-            
     except Exception as e:
-        frappe.log_error(f"Error in team user assignment: {str(e)}")
+        frappe.log_error(f"Error in fallback team assignment: {str(e)}")
 
 
 def sync_team_users_from_dynamic_assignment(team_name):

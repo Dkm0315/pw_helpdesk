@@ -1,0 +1,67 @@
+{
+ "custom_fields": [
+  {
+   "fieldname": "custom_category_section",
+   "label": "Category-Based Assignment",
+   "fieldtype": "Section Break",
+   "insert_after": "assign_condition",
+   "description": "Configure automatic assignment based on ticket categories",
+   "collapsible": 0,
+   "dt": "Assignment Rule"
+  },
+  {
+   "fieldname": "custom_applicable_categories",
+   "label": "Applicable Categories",
+   "fieldtype": "Table",
+   "options": "HD Category Selection",
+   "insert_after": "custom_category_section",
+   "description": "Select categories for which this assignment rule should apply",
+   "in_list_view": 0,
+   "reqd": 0,
+   "read_only": 0,
+   "dt": "Assignment Rule"
+  },
+  {
+   "fieldname": "custom_auto_generate_condition",
+   "label": "Auto-Generate Condition",
+   "fieldtype": "Button",
+   "insert_after": "custom_applicable_categories",
+   "description": "Click to auto-generate assign condition from selected categories",
+   "in_list_view": 0,
+   "dt": "Assignment Rule"
+  },
+  {
+   "fieldname": "custom_user_assignment_section",
+   "label": "User Assignment Configuration",
+   "fieldtype": "Section Break",
+   "insert_after": "custom_auto_generate_condition",
+   "collapsible": 0,
+   "dt": "Assignment Rule"
+  },
+  {
+   "fieldname": "custom_user_assignment",
+   "label": "User Assignment",
+   "fieldtype": "Link",
+   "options": "Dynamic User Assignment",
+   "insert_after": "custom_user_assignment_section",
+   "description": "Link to Dynamic User Assignment for advanced user selection criteria",
+   "depends_on": "eval: doc.rule == 'Based on Field'",
+   "in_list_view": 0,
+   "reqd": 0,
+   "read_only": 0,
+   "dt": "Assignment Rule"
+  }
+ ],
+ "custom_perms": [],
+ "doctype": "Assignment Rule",
+ "property_setters": [
+  {
+   "doctype_or_field": "DocField",
+   "fieldname": "assign_condition",
+   "property": "description",
+   "value": "Auto-generated from category selections. You can also manually enter Python expressions like: status == 'Open' and type == 'Bug'",
+   "property_type": "Text"
+  }
+ ],
+ "sync_on_migrate": 1
+} 

@@ -1,0 +1,85 @@
+{
+ "custom_fields": [
+  {
+   "fieldname": "custom_category_selection_section",
+   "label": "Category Selection",
+   "fieldtype": "Section Break",
+   "insert_after": "condition",
+   "description": "Select categories for automatic SLA application",
+   "collapsible": 0,
+   "dt": "HD Service Level Agreement"
+  },
+  {
+   "fieldname": "custom_applicable_categories",
+   "label": "Applicable Categories",
+   "fieldtype": "Table",
+   "options": "HD Category Selection",
+   "insert_after": "custom_category_selection_section",
+   "description": "Select categories for which this SLA should be automatically applied",
+   "in_list_view": 0,
+   "reqd": 0,
+   "read_only": 0,
+   "dt": "HD Service Level Agreement"
+  },
+  {
+   "fieldname": "custom_auto_generate_condition",
+   "label": "Auto-Generate Condition",
+   "fieldtype": "Button",
+   "insert_after": "custom_applicable_categories",
+   "description": "Click to auto-generate condition from selected categories",
+   "in_list_view": 0,
+   "dt": "HD Service Level Agreement"
+  },
+  {
+   "fieldname": "custom_assignment_section",
+   "label": "Assignment Configuration",
+   "fieldtype": "Section Break",
+   "insert_after": "custom_auto_generate_condition",
+   "collapsible": 0,
+   "dt": "HD Service Level Agreement"
+  },
+  {
+   "fieldname": "custom_auto_assign_team", 
+   "label": "Auto Assign Team",
+   "fieldtype": "Link",
+   "options": "HD Team",
+   "insert_after": "custom_assignment_section",
+   "description": "Team to automatically assign when this SLA is applied to tickets",
+   "in_list_view": 0,
+   "reqd": 0,
+   "read_only": 0,
+   "dt": "HD Service Level Agreement"
+  },
+  {
+   "fieldname": "custom_assignment_rule",
+   "label": "Assignment Rule", 
+   "fieldtype": "Link",
+   "options": "Assignment Rule",
+   "insert_after": "custom_auto_assign_team",
+   "description": "Assignment rule to use for automatic agent assignment (optional - team's rule will be used by default)",
+   "in_list_view": 0,
+   "reqd": 0,
+   "read_only": 0,
+   "dt": "HD Service Level Agreement"
+  }
+ ],
+ "custom_perms": [],
+ "doctype": "HD Service Level Agreement",
+ "property_setters": [
+  {
+   "doctype_or_field": "DocField",
+   "fieldname": "condition",
+   "property": "description",
+   "value": "Auto-generated from category selections. You can also manually enter Python expressions.",
+   "property_type": "Text"
+  },
+  {
+   "doctype_or_field": "DocField", 
+   "fieldname": "condition",
+   "property": "read_only",
+   "value": "0",
+   "property_type": "Check"
+  }
+ ],
+ "sync_on_migrate": 1
+} 
