@@ -278,9 +278,9 @@ def after_install():
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-fixtures = [
-    {"dt": "HD Service Level Agreement"}
-]
+# fixtures = [
+#     {"dt": "HD Service Level Agreement"}
+
 
 # Import enhanced SLA system on startup
 def after_app_install():
