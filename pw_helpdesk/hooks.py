@@ -172,13 +172,15 @@ doc_events = {
 	}
 }
 
+# Installation hooks
+after_migrate = [
+	"pw_helpdesk.customizations.custom_actions_fix.apply_custom_actions_fix"
+]
+
 # Import enhanced SLA system
 def after_install():
 	"""Initialize enhanced SLA system after app installation"""
-	try:
-		import pw_helpdesk.customizations.enhanced_sla
-	except ImportError:
-		pass
+	pass
 
 # Scheduled Tasks
 # ---------------
@@ -277,13 +279,10 @@ def after_install():
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 fixtures = [
-    {"dt": "HD Service Level Agreement", "dt":"HD Ticket"},
+    {"dt": "HD Service Level Agreement"}
 ]
 
 # Import enhanced SLA system on startup
 def after_app_install():
 	"""Initialize enhanced SLA system after app installation"""
-	try:
-		import pw_helpdesk.customizations.enhanced_sla
-	except ImportError:
-		pass
+	pass
